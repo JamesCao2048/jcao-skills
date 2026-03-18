@@ -62,3 +62,10 @@ Then invoke it in Claude Code:
 ## Contributing
 
 Found a bug or want to suggest an improvement? Open an issue or PR.
+
+---
+
+## Skills I use daily
+
+- [obra/superpowers](https://github.com/obra/superpowers) — Development workflow skills: TDD, systematic debugging, git worktrees, code review. The reason I started writing my own.
+- [mattpocock/skills](https://github.com/mattpocock/skills) — Personal skills shared straight from Matt's `.claude` directory. Good reference for what a real, unpolished skill collection looks like.

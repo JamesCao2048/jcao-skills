@@ -61,3 +61,10 @@ cp flow2-graph-prompt/SKILL.md ~/.claude/skills/flow2-graph-prompt/SKILL.md
 ## 贡献
 
 发现问题或有改进建议？欢迎提 Issue 或 PR。
+
+---
+
+## 我日常在用的 Skills
+
+- [obra/superpowers](https://github.com/obra/superpowers) — 开发工作流 Skills：TDD、系统化调试、git worktrees、代码审查。我开始写自己的 Skills 的直接原因。
+- [mattpocock/skills](https://github.com/mattpocock/skills) — Matt 直接从 `.claude` 目录开放的个人 Skills，是我见过最真实的个人 Skill 仓库参考。
