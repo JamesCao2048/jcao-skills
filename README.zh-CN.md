@@ -54,6 +54,10 @@ cp flow2-graph-prompt/SKILL.md ~/.claude/skills/flow2-graph-prompt/SKILL.md
 
 ---
 
+## 计划
+
+- [ ] 为每个 Skill 补充脱敏示例数据及运行结果截图
+
 ## 贡献
 
 发现问题或有改进建议？欢迎提 Issue 或 PR。

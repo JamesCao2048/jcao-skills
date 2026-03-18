@@ -54,6 +54,11 @@ Then invoke it in Claude Code:
 
 ---
 
+## Roadmap
+
+- [ ] Add worked examples with anonymized data for each skill
+- [ ] Add screenshots / output samples
+
 ## Contributing
 
 Found a bug or want to suggest an improvement? Open an issue or PR.
