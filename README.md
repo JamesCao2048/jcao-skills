@@ -16,6 +16,18 @@ Practical AI agent skills, battle-tested in real workflows.
 
 ---
 
+## Coming soon
+
+| Skill | What it does |
+|-------|-------------|
+| multi-fallback-websearch | Fetch any URL that blocks bots — six-layer fallback: curl → Jina Reader → Scrapling → Tavily Extract → Wayback Machine → Tavily Search |
+| verify-deep-research | Verify every URL citation in an AI-generated research report, cross-check claims, assess source authority, and output a corrected document |
+| npu-env-setup | Set up NPU execution environments interactively — local, SSH remote, or inside Docker containers |
+| notebook-llm-pipeline | Automate NotebookLM workflows: add sources, query notebooks, and create audio/study guides via MCP |
+| industry-pipeline | Research a target company end-to-end: industry mapping, competitive landscape, and role-fit analysis |
+
+---
+
 ## How to install
 
 Each skill is a single `SKILL.md` file. Copy it into your Claude skills directory:

@@ -16,6 +16,18 @@
 
 ---
 
+## 即将发布
+
+| Skill | 功能 |
+|-------|------|
+| multi-fallback-websearch | 抓取任何反爬 URL——六层降级策略：curl → Jina Reader → Scrapling → Tavily Extract → Wayback Machine → Tavily Search |
+| verify-deep-research | 验证 AI 生成研究报告中的每条 URL 引用，逐一核查原文，评估来源权威性，输出修正后的文档 |
+| npu-env-setup | 交互式配置 NPU 执行环境——支持本地、SSH 远程及 Docker 容器内部署 |
+| notebook-llm-pipeline | 自动化 NotebookLM 工作流：通过 MCP 添加资料、查询笔记本、生成音频或学习材料 |
+| industry-pipeline | 端到端研究目标公司：行业图谱、竞争格局、岗位匹配分析 |
+
+---
+
 ## 安装方法
 
 每个 Skill 是一个 `SKILL.md` 文件，复制到 Claude 的 skills 目录即可：
