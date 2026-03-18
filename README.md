@@ -1,5 +1,7 @@
 # jcao-skills
 
+English | [简体中文](./README.zh-CN.md)
+
 Practical AI agent skills, battle-tested in real workflows.
 
 > Skills I built because people kept asking me for them.
