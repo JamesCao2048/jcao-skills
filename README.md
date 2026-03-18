@@ -24,7 +24,6 @@ Practical AI agent skills, battle-tested in real workflows.
 | verify-deep-research | Verify every URL citation in an AI-generated research report, cross-check claims, assess source authority, and output a corrected document |
 | npu-env-setup | Set up NPU execution environments interactively — local, SSH remote, or inside Docker containers |
 | notebook-llm-pipeline | Automate NotebookLM workflows: add sources, query notebooks, and create audio/study guides via MCP |
-| industry-pipeline | Research a target company end-to-end: industry mapping, competitive landscape, and role-fit analysis |
 
 ---
 
