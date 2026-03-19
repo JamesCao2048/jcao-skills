@@ -4,7 +4,7 @@ English | [简体中文](./README.zh-CN.md)
 
 Practical AI agent skills, battle-tested in real workflows.
 
-> Skills I built because people kept asking me for them.
+> Skills I published because people kept asking me for them.
 
 ---
 
@@ -12,8 +12,8 @@ Practical AI agent skills, battle-tested in real workflows.
 
 | Skill | What it does | Status |
 |-------|-------------|--------|
-| [flow-viz-prompt](./flow-viz-prompt/) | Turn any pipeline description into a ready-to-paste Gemini image generation prompt — NotebookLM style | 🔥 Battle-tested |
-| [skill-publisher](./skill-publisher/) | Scan an internal skill for privacy leaks, i18n issues, and structure problems — outputs a sanitized publication-ready copy | 🌱 New |
+| [flow-viz-prompt](./flow-viz-prompt/) | Turn any pipeline description or code into a ready-to-paste NotebookLM style image generation prompt (supports reporting and code granularity) | 🔥 Battle-tested |
+| [skill-publisher](./skill-publisher/) | Scan a personal or proprietary skill for privacy leaks, i18n issues, and structure problems — outputs a sanitized publication-ready copy | 🌱 New |
 
 ---
 
@@ -21,27 +21,27 @@ Practical AI agent skills, battle-tested in real workflows.
 
 ### flow-viz-prompt
 
-Two diagrams generated with this skill, both using Gemini's image generation model.
+Two diagrams generated with this skill using Gemini Pro (Nano-Banana 2).
 
 ---
 
 **Codex Subagent Spawn: Key Design Choices**
 
-Prompt: *"Code-level design diagram for the Codex agent — how does the parent model spawn a subagent, what safety gates run, and how does async completion notification work? Source: `codex-rs/` codebase."*
+Prompt: *"Code-level diagram prompt for the Codex subagent mechanism, highlighting key design choices and reasoning. Source: `xxx/codex/` codebase."*
 
-→ Triggers **code granularity** (keyword: "code-level"). The skill reads the repo, confirms the control flow (AgentControl → safety gates → fork vs. new thread decision → completion watcher), then generates the prompt.
+→ Triggers **code granularity** (keyword: "code-level"). The skill reads the repo and confirms the control flow (AgentControl → safety gates → fork vs. new thread decision → completion watcher) with the user. The user can review and refine the control flow before giving final approval, then the agent generates the prompt.
 
-![Codex Subagent Spawn](flow-viz-prompt/examples/codex-subagent-spawn.png)
+![Codex Subagent Spawn](examples/flow-viz-prompt/codex-subagent-spawn.png)
 
 ---
 
 **OpenClaw Memory Architecture — What Gets Remembered vs. Discarded**
 
-Prompt: *"Flowchart of OpenClaw's memory architecture — I want to show what gets remembered vs. discarded across sessions. Top-to-bottom layout."*
+Prompt: *"Flowchart prompt of the memory architecture. I want to show what gets remembered vs. discarded with Discord or Slack channels. Code: `xxx/openclaw`"*
 
 → Triggers **reporting granularity** (default). The skill asks for input/output layers and core steps, confirms the control flow (channel history buffer → session transcript → persistence paths → long-term memory flush), then generates the prompt.
 
-![OpenClaw Memory Architecture](flow-viz-prompt/examples/openclaw-memory-arch.png)
+![OpenClaw Memory Architecture](examples/flow-viz-prompt/openclaw-memory-arch.png)
 
 ---
 
@@ -58,19 +58,43 @@ Prompt: *"Flowchart of OpenClaw's memory architecture — I want to show what ge
 
 ## How to install
 
-Each skill is a single `SKILL.md` file. Copy it into your Claude skills directory:
+**Option 1 — Ask Claude Code (easiest, works on all platforms)**
 
-```bash
-# macOS / Linux
-cp flow-viz-prompt/SKILL.md ~/.claude/skills/flow-viz-prompt/SKILL.md
-cp skill-publisher/SKILL.md ~/.claude/skills/skill-publisher/SKILL.md
+Open Claude Code in any directory and paste:
+
+```
+Install this skill: https://github.com/JamesCao2048/jcao-skills/tree/main/flow-viz-prompt
 ```
 
-Then invoke it in Claude Code:
+Claude will fetch the files and copy them into your skills directory automatically.
+
+**Option 2 — Manual copy**
+
+Clone the repo and copy the skill folder:
+
+```bash
+git clone https://github.com/JamesCao2048/jcao-skills.git
+
+# macOS / Linux
+cp -r jcao-skills/flow-viz-prompt ~/.claude/skills/
+
+# Windows (PowerShell)
+Copy-Item -Recurse jcao-skills\flow-viz-prompt $HOME\.claude\skills\
+```
+
+> Copy the whole folder, not just `SKILL.md`, some skills include reference files alongside.
+
+**Invoking a skill**
+
+Use the slash command, or just describe what you want in plain language:
 
 ```
 /flow-viz-prompt
-/skill-publisher
+
+# or naturally:
+"Give me a flowchart prompt for my data pipeline"
+"Code-level architecture diagram for this codebase"
+"diagram prompt for my agent workflow"
 ```
 
 ---
@@ -92,5 +116,5 @@ Found a bug or want to suggest an improvement? Open an issue or PR.
 
 ## Skills I use daily
 
-- [obra/superpowers](https://github.com/obra/superpowers) — Development workflow skills: TDD, systematic debugging, git worktrees, code review. The reason I started writing my own.
+- [obra/superpowers](https://github.com/obra/superpowers) — Development workflow skills: TDD, systematic debugging, git worktrees, code review. The reason Claude Code becomes a genuinely different tool for me.
 - [mattpocock/skills](https://github.com/mattpocock/skills) — Personal skills shared straight from Matt's `.claude` directory. Good reference for what a real, unpolished skill collection looks like.
