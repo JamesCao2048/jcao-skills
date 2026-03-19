@@ -12,7 +12,36 @@
 
 | Skill | 功能 | 状态 |
 |-------|------|------|
-| [flow2-graph-prompt](./flow2-graph-prompt/) | 把任意 pipeline 描述转成可直接粘贴到 Gemini 的流程图生成 Prompt——NotebookLM 风格 | 🔥 Battle-tested |
+| [flow-viz-prompt](./flow-viz-prompt/) | 把任意 pipeline 描述转成可直接粘贴到 Gemini 的流程图生成 Prompt——NotebookLM 风格 | 🔥 Battle-tested |
+| [skill-publisher](./skill-publisher/) | 扫描内部 Skill 的隐私泄露、i18n 问题和结构问题，输出脱敏后的发布版本，不修改源文件 | 🌱 New |
+
+---
+
+## 示例
+
+### flow-viz-prompt
+
+以下两张图用这个 Skill 生成提示词，再由 Gemini 图片生成模型渲染输出。
+
+---
+
+**Codex Subagent Spawn：关键设计决策**
+
+触发词：*"帮我画一张 Codex agent 的代码级设计图——parent model 怎么 spawn 子 agent、经过哪些 safety gate、async 完成通知怎么工作？基于 `codex-rs/` 代码库。"*
+
+→ 命中**设计粒度**（关键词"代码级"）。Skill 读取代码库，确认控制流（AgentControl → 安全门 → fork vs 新线程决策 → 完成监控器），然后生成提示词。
+
+![Codex Subagent Spawn](flow-viz-prompt/examples/codex-subagent-spawn.png)
+
+---
+
+**OpenClaw 内存架构——哪些被记住，哪些被丢弃**
+
+触发词：*"给我一张 OpenClaw memory architecture 的流程图，要展示哪些内容会被记住、哪些会被丢弃。从上到下排列。"*
+
+→ 命中**汇报粒度**（默认）。Skill 逐一确认输入/输出层和核心步骤（channel history buffer → session transcript → 持久化路径 → 长期内存 flush），然后生成提示词。
+
+![OpenClaw Memory Architecture](flow-viz-prompt/examples/openclaw-memory-arch.png)
 
 ---
 
@@ -33,13 +62,15 @@
 
 ```bash
 # macOS / Linux
-cp flow2-graph-prompt/SKILL.md ~/.claude/skills/flow2-graph-prompt/SKILL.md
+cp flow-viz-prompt/SKILL.md ~/.claude/skills/flow-viz-prompt/SKILL.md
+cp skill-publisher/SKILL.md ~/.claude/skills/skill-publisher/SKILL.md
 ```
 
 然后在 Claude Code 中直接调用：
 
 ```
-/flow2-graph-prompt
+/flow-viz-prompt
+/skill-publisher
 ```
 
 ---
@@ -52,10 +83,6 @@ cp flow2-graph-prompt/SKILL.md ~/.claude/skills/flow2-graph-prompt/SKILL.md
 | 🌱 New | 刚发布，欢迎反馈 |
 
 ---
-
-## 计划
-
-- [ ] 为每个 Skill 补充脱敏示例数据及运行结果截图
 
 ## 贡献
 
