@@ -1,6 +1,6 @@
 ---
 name: flow-viz-prompt
-description: Use when user wants to generate an image-generation prompt for a pipeline, workflow, or codebase architecture diagram. Triggers on: "flowchart prompt", "diagram prompt", "figure prompt", "architecture diagram prompt", "generate a prompt for my pipeline", "make a flowchart prompt", "visualization prompt", "generate figure prompt", "figure prompt for", and Chinese: "流程图提示词", "生成流程图提示词", "架构图提示词", "设计图提示词", "画图提示词", "pipeline可视化提示词", "给我一个流程图的prompt", "生成一个架构图的提示词". Do NOT trigger on requests to just draw or show a diagram without "提示词/prompt" — e.g., "画架构图", "生成流程图", "帮我画个图" alone should NOT trigger this skill.
+description: Use when user wants to generate an image-generation prompt for a pipeline, workflow, or codebase architecture diagram. Triggers on: "flowchart prompt", "diagram prompt", "figure prompt", "visualization prompt", and Chinese: "流程图提示词", "架构图提示词", "画图提示词", "pipeline可视化提示词", "给我一个流程图的prompt". Do NOT trigger on requests to just draw or show a diagram without "prompt" — e.g., "draw graph", "生成流程图" alone should NOT trigger this skill.
 ---
 
 # Flow Viz Prompt

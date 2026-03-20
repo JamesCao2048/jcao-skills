@@ -203,12 +203,12 @@ Health check method:
 
 Read the corresponding template and fill placeholders:
 
-1. **Base template**: `templates/exec-env-{run_mode}.md`
+1. **Base template**: `references/exec-env-{run_mode}.md`
    - Fill all `{placeholder}` values from collected answers
    - If no device constraint: remove the `- **Device constraint**: ...` line entirely
 
 2. **Health check** (if Q6 = yes):
-   - Read `templates/health-check-{npu|gpu}.md`
+   - Read `references/health-check-{npu|gpu}.md`
    - Select the correct variant (tensor or smi) based on Q6 answer
    - Fill `{host_cmd}` and `{exec_cmd}` from the base template's command wrappers:
      - For run_modes with only `exec_cmd_template`: use it for both
@@ -216,11 +216,11 @@ Read the corresponding template and fill placeholders:
    - Append after the base template
 
 3. **Remote file transfer** (if run_mode contains `ssh`):
-   - Read `templates/remote-dev-basics.md`, fill `{ssh_host}` (and `{container_id}` if docker)
+   - Read `references/remote-dev-basics.md`, fill `{ssh_host}` (and `{container_id}` if docker)
    - Append after health check (or after base if no health check)
 
 4. **Code sync** (if Q4 = git or scp):
-   - Read `templates/remote-code-sync-{git|scp}.md`, fill placeholders
+   - Read `references/remote-code-sync-{git|scp}.md`, fill placeholders
    - Append at the end
 
 ### 2b. Preview
@@ -260,4 +260,4 @@ To modify: edit ./CLAUDE.md directly, or re-run /device-env-setup.
 2. **Script analysis is advisory only** — prefill suggestions, user can override everything
 3. **Only touch the device config section** — never modify other parts of CLAUDE.md
 4. **Same paths = simplify** — if host and container working dirs are identical, show once
-5. **Read `device-health-check.md`** for expert knowledge on health check design decisions (timeout rationale, npu-smi unreliability, etc.)
+5. **Read `references/device-health-check.md`** for expert knowledge on health check design decisions (timeout rationale, npu-smi unreliability, etc.)

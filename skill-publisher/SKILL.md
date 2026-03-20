@@ -65,7 +65,9 @@ Scan `SKILL.md` and `references/`:
 | Wrong description style | `description` doesn't start with "Use when" | Rewrite to "Use when..." format |
 | SKILL.md too long | Line count > 500 | Suggest splitting into `references/` by topic |
 | Reference file too long | Any `references/` file > 300 lines | Suggest adding a table of contents |
-| Unrecognized files | Files not in: SKILL.md, references/\*, scripts/\*, examples/\*, assets/\* | Flag — suggest removal with reason |
+| `templates/` folder present | Skill has a `templates/` directory | Suggest renaming to `references/` — per official anthropics/skills convention, runtime files (templates, knowledge docs) belong in `references/`. Ask user: rename now? |
+| Flat `.md` reference files at root | `.md` files in skill root other than `SKILL.md` and `README.md` | Suggest moving to `references/` subfolder. Ask user: move now? |
+| Unrecognized files | Files not in: SKILL.md, README.md, references/\*, reference/\*, scripts/\*, examples/\*, assets/\* | Flag — suggest removal with reason |
 
 ### 📝 Content
 
