@@ -14,7 +14,7 @@ Practical AI agent skills, battle-tested in real workflows.
 |-------|-------------|--------|
 | [flow-viz-prompt](./flow-viz-prompt/) | Turn any pipeline description or code into a ready-to-paste NotebookLM style image generation prompt (supports reporting and code granularity) | 🔥 Battle-tested |
 | [skill-publisher](./skill-publisher/) | Scan a personal or proprietary skill for privacy leaks, i18n issues, and structure problems, outputs a sanitized publication-ready copy | 🌱 New |
-| [device-env-setup](./device-env-setup/) | Configure how Claude executes commands on machines with accelerator devices (Ascend NPU or NVIDIA GPU), interactively collects environment details and writes command execution templates to CLAUDE.md in the current project. Supports local, SSH, Docker, and Conda environments | 🌱 New |
+| [device-env-setup](./device-env-setup/) | Configure how Claude executes commands on machines with accelerator devices (NVIDIA GPU or Ascend NPU). Supports local, SSH, Docker, and Conda environments | 🌱 New |
 
 ---
 
