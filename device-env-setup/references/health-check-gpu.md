@@ -48,3 +48,33 @@ wait
 {host_cmd} "nvidia-smi"
 ```
 Review GPU status and memory usage.
+
+---
+
+## Design Notes
+
+### nvidia-smi is generally reliable
+
+Unlike NPU, `nvidia-smi` output is trustworthy for most failure modes. The tensor dry-run approach is a stronger guarantee but less critical than for NPU.
+
+### Timeout can be shorter (15s)
+
+CUDA import is faster than torch_npu. 15 seconds is sufficient.
+
+### torch.cuda.synchronize(N) is still recommended
+
+Async dispatch can mask failures — the sync forces completion and reveals any issues.
+
+### Device enumeration vs tensor test
+
+- `nvidia-smi` (device enumeration) runs on the **host** — even in Docker mode, the host SMI is canonical
+- Tensor dry-run runs in the **execution environment** (exec_cmd_template) — torch is installed there
+
+### Reporting format
+
+Always report per-device status and suggest the first available device:
+```
+Device Health Check (N devices):
+  gpu:0  OK  <- suggested
+  gpu:1  FAIL
+```

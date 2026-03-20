@@ -14,6 +14,7 @@
 |-------|------|------|
 | [flow-viz-prompt](./flow-viz-prompt/) | 把任意 pipeline 描述或代码转成可直接粘贴的 NotebookLM 风格流程图生成 Prompt（支持汇报粒度和代码粒度） | 🔥 Battle-tested |
 | [skill-publisher](./skill-publisher/) | 扫描个人或私有 Skill 的隐私泄露、i18n 问题和结构问题，输出脱敏后的发布版本，不修改源文件 | 🌱 New |
+| [device-env-setup](./device-env-setup/) | 配置 Claude 在带有加速卡（Ascend NPU 或 NVIDIA GPU）的机器上执行命令的方式——交互式收集环境信息，将命令执行模板写入当前项目的CLAUDE.md。支持本地、SSH、Docker 和 Conda 环境 | 🌱 New |
 
 ---
 
@@ -51,7 +52,6 @@
 |-------|------|
 | multi-fallback-websearch | 抓取任何反爬 URL——六层降级策略：curl → Jina Reader → Scrapling → Tavily Extract → Wayback Machine → Tavily Search |
 | verify-deep-research | 验证 AI 生成研究报告中的每条 URL 引用，逐一核查原文，评估来源权威性，输出修正后的文档 |
-| npu-env-setup | 交互式配置 NPU 执行环境——支持本地、SSH 远程及 Docker 容器内部署 |
 | notebook-llm-pipeline | 自动化 NotebookLM 工作流：通过 MCP 添加资料、查询笔记本、生成音频或学习材料 |
 
 ---

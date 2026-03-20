@@ -52,3 +52,39 @@ wait
 {host_cmd} "npu-smi info"
 ```
 Review the Health column for each device.
+
+---
+
+## Design Notes
+
+### Why npu-smi is not sufficient
+
+`npu-smi info` shows `Health=OK` even when a device is hung. A hung NPU will accept `set_device()` but block forever on `synchronize()`. This has been observed in production — one case took 555s before the process was killed. Only a tensor operation with `synchronize()` is reliable.
+
+### Timeout must be >= 30s
+
+`import torch` + `import torch_npu` cold start takes ~18 seconds. A shorter timeout will falsely report all devices as hung. 30s is sufficient to distinguish cold start (~18s) from truly hung devices (infinite block).
+
+### Why parallel, not sequential
+
+Sequential testing takes N × 30s. Parallel completes in ~30s regardless of device count.
+
+### torch_npu.npu.synchronize(N) is the critical call
+
+Without `synchronize()`, async dispatch may return immediately without exercising the device. The sync forces completion and reveals hung state.
+
+### Device enumeration vs tensor test
+
+- `npu-smi` (device enumeration) runs on the **host** — even in Docker mode, the host SMI is canonical
+- Tensor dry-run runs in the **execution environment** (exec_cmd_template) — torch_npu is installed there
+
+### Reporting format
+
+Always report per-device status and suggest the first available device:
+```
+Device Health Check (N devices, parallel scan ~30s):
+  npu:0  HUNG
+  npu:1  OK  <- suggested
+  npu:2  OK
+```
+If all devices are unavailable, report clearly and halt — do not proceed.

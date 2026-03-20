@@ -13,7 +13,8 @@ Practical AI agent skills, battle-tested in real workflows.
 | Skill | What it does | Status |
 |-------|-------------|--------|
 | [flow-viz-prompt](./flow-viz-prompt/) | Turn any pipeline description or code into a ready-to-paste NotebookLM style image generation prompt (supports reporting and code granularity) | 🔥 Battle-tested |
-| [skill-publisher](./skill-publisher/) | Scan a personal or proprietary skill for privacy leaks, i18n issues, and structure problems — outputs a sanitized publication-ready copy | 🌱 New |
+| [skill-publisher](./skill-publisher/) | Scan a personal or proprietary skill for privacy leaks, i18n issues, and structure problems, outputs a sanitized publication-ready copy | 🌱 New |
+| [device-env-setup](./device-env-setup/) | Configure how Claude executes commands on machines with accelerator devices (Ascend NPU or NVIDIA GPU), interactively collects environment details and writes command execution templates to CLAUDE.md in the current project. Supports local, SSH, Docker, and Conda environments | 🌱 New |
 
 ---
 
@@ -51,7 +52,6 @@ Prompt: *"Flowchart prompt of the memory architecture. I want to show what gets 
 |-------|-------------|
 | multi-fallback-websearch | Fetch any URL that blocks bots — six-layer fallback: curl → Jina Reader → Scrapling → Tavily Extract → Wayback Machine → Tavily Search |
 | verify-deep-research | Verify every URL citation in an AI-generated research report, cross-check claims, assess source authority, and output a corrected document |
-| npu-env-setup | Set up NPU execution environments interactively — local, SSH remote, or inside Docker containers |
 | notebook-llm-pipeline | Automate NotebookLM workflows: add sources, query notebooks, and create audio/study guides via MCP |
 
 ---

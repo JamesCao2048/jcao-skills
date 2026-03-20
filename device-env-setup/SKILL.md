@@ -1,13 +1,12 @@
 ---
 name: device-env-setup
 description: >-
-  Use when you need to configure how Claude executes commands on machines with
-  accelerator devices (Ascend NPU or NVIDIA GPU). Interactively collects
-  environment details and writes a self-contained device environment config
-  section to CLAUDE.md, including command execution templates and optional
-  device health checks. Supports local, SSH, Docker, and Conda environments.
-  Triggers on: "device env setup", "device-env-setup", "configure device environment",
-  "setup NPU environment", "setup GPU environment", "配置设备环境", "设备环境配置".
+  Use when you need to configure how Claude executes commands for machines
+  with accelerator devices (Ascend NPU or NVIDIA GPU). Collects environment
+  details interactively and writes command execution templates to CLAUDE.md.
+  Supports local, SSH, Docker, and Conda environments.
+  Triggers on: "device env setup", "device-env-setup", "setup NPU environment",
+  "setup GPU environment", "配置设备环境", "设备环境配置".
 ---
 
 # device-env-setup
@@ -220,7 +219,7 @@ Read the corresponding template and fill placeholders:
    - Append after health check (or after base if no health check)
 
 4. **Code sync** (if Q4 = git or scp):
-   - Read `references/remote-code-sync-{git|scp}.md`, fill placeholders
+   - Read `references/remote-code-sync.md`, use the `<!-- VARIANT: git -->` or `<!-- VARIANT: scp -->` section, fill placeholders
    - Append at the end
 
 ### 2b. Preview
@@ -260,4 +259,4 @@ To modify: edit ./CLAUDE.md directly, or re-run /device-env-setup.
 2. **Script analysis is advisory only** — prefill suggestions, user can override everything
 3. **Only touch the device config section** — never modify other parts of CLAUDE.md
 4. **Same paths = simplify** — if host and container working dirs are identical, show once
-5. **Read `references/device-health-check.md`** for expert knowledge on health check design decisions (timeout rationale, npu-smi unreliability, etc.)
+5. **See `## Design Notes`** in `references/health-check-{npu|gpu}.md` for expert knowledge on health check design decisions (timeout rationale, npu-smi unreliability, etc.)

@@ -16,7 +16,7 @@ ssh-copy-id user@your-server
 **2. Configure SSH host alias** in `~/.ssh/config`:
 ```
 Host myserver
-  HostName 192.168.1.100
+  HostName 203.0.113.1
   User myuser
   IdentityFile ~/.ssh/id_rsa
 ```
