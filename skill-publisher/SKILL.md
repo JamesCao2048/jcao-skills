@@ -44,9 +44,9 @@ Scan all files (including `scripts/`):
 
 ### 🌐 i18n
 
-**Scope:** SKILL.md and files in references/ only
+**Scope:** SKILL.md and files in `references/` and `agents/` (instruction files Claude runs)
 
-Scan `SKILL.md` and `references/`:
+Scan `SKILL.md`, `references/`, and `agents/`:
 
 | Check | Detection | Proposed Action |
 |-------|-----------|-----------------|
@@ -59,15 +59,34 @@ Scan `SKILL.md` and `references/`:
 
 **Scope:** directory layout and SKILL.md (not the content of scripts/)
 
+**File placement taxonomy** (per [anthropics/skills](https://github.com/anthropics/skills) convention):
+
+| File type | Correct location |
+|-----------|-----------------|
+| Knowledge docs, schemas, best practices, fill-in templates Claude reads at runtime | `references/` |
+| Sub-agent role/instruction files Claude spawns as separate agents | `agents/` |
+| Executable scripts | `scripts/` |
+| Example outputs and sample data | `examples/` |
+| Static assets (images, etc.) | `assets/` |
+
+**Checks:**
+
 | Check | Detection | Proposed Action |
 |-------|-----------|-----------------|
 | Missing/invalid frontmatter | No `---` block at top, or missing `name` / `description` | Generate standard frontmatter |
 | Wrong description style | `description` doesn't start with "Use when" | Rewrite to "Use when..." format |
 | SKILL.md too long | Line count > 500 | Suggest splitting into `references/` by topic |
 | Reference file too long | Any `references/` file > 300 lines | Suggest adding a table of contents |
-| `templates/` folder present | Skill has a `templates/` directory | Suggest renaming to `references/` — per official anthropics/skills convention, runtime files (templates, knowledge docs) belong in `references/`. Ask user: rename now? |
-| Flat `.md` reference files at root | `.md` files in skill root other than `SKILL.md` and `README.md` | Suggest moving to `references/` subfolder. Ask user: move now? |
-| Unrecognized files | Files not in: SKILL.md, README.md, references/\*, reference/\*, scripts/\*, examples/\*, assets/\* | Flag — suggest removal with reason |
+| Misplaced files at skill root | `.md` files other than `SKILL.md` / `README.md` at skill root | Classify by content (see below), offer to move — user chooses yes/no |
+| Misnamed subfolder | A subfolder exists whose name isn't one of: `references/`, `agents/`, `scripts/`, `examples/`, `assets/` | Classify by content (see below), suggest correct name — user chooses yes/no |
+| Unrecognized files | After classification, files still not fitting any category | Flag — ask user: remove / keep as-is |
+
+**Classification rules** (for misplaced/misnamed files — read the file content to decide):
+
+- **→ `references/`**: knowledge docs, schemas, fill-in templates Claude renders into output, best-practice guides — anything Claude reads to inform its work but does not spawn separately
+- **→ `agents/`**: files that define a distinct agent role (contain role persona + instructions for an agent Claude spawns, e.g. "You are an Analyzer. Your job is to...")
+- **→ `scripts/`**: executable code (shell, Python, etc.) — check shebang or file extension
+- When ambiguous, show the first 5 lines of the file and ask the user which category fits
 
 ### 📝 Content
 
