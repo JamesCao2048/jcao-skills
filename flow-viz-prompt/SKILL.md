@@ -5,7 +5,11 @@ description: Use when user wants to generate an image-generation prompt for a pi
 
 # Flow Viz Prompt
 
-Converts any pipeline or workflow into a professional image-generation prompt, ready to paste into Gemini or any image-generation model. Fixed visual style: **NotebookLM Style** (clean digital whiteboard aesthetic).
+Converts any pipeline or workflow into a professional image-generation prompt, ready to paste into Gemini or any image-generation model.
+
+Supports two visual styles:
+- **NotebookLM Style** (default): Clean digital whiteboard aesthetic — professional, modern, presentation-ready
+- **Cartoon & Sketch Style**: Hand-drawn, playful illustration aesthetic — warm, approachable, storytelling-friendly (inspired by [Angie Temaly's portfolio](https://angie.temaly.com/))
 
 Supports two granularity levels:
 - **Reporting granularity** (default): Suitable for PPT/tech presentations — nodes are abstract step names, no code details
@@ -22,6 +26,19 @@ Supports two granularity levels:
 ## Output
 
 A complete image-generation prompt in the confirmed output language, ready to paste into Gemini or any image-generation model.
+
+---
+
+## Step 0: Style Detection (automatic, no prompting)
+
+Infer the visual style from the user's trigger phrase:
+
+| Style | Trigger keywords (any match) |
+|-------|------------------------------|
+| **Cartoon & Sketch** | "cartoon", "sketch", "hand-drawn", "playful", "cute", "fun", "illustration", "doodle", "卡通", "手绘", "涂鸦", "可爱风", "插画风", "趣味" |
+| **NotebookLM** | All other cases (default) |
+
+Announce the detected style at the start of the reply: `[Style: NotebookLM]` or `[Style: Cartoon & Sketch]`.
 
 ---
 
@@ -104,7 +121,16 @@ Omitted: [list of steps not shown]
 
 ### Step 2: Generate the Gemini Image-Generation Prompt
 
-After the user confirms the control flow, select the template matching the granularity and generate the prompt. Output the complete text directly so the user can copy-paste it into Gemini. Generate the prompt in the language confirmed in Step 0.5.
+After the user confirms the control flow, select the template matching both the **style** and **granularity**, then generate the prompt:
+
+| Style | Granularity | Template |
+|-------|-------------|----------|
+| NotebookLM | Reporting | Template A |
+| NotebookLM | Code | Template B |
+| Cartoon & Sketch | Reporting | Template C |
+| Cartoon & Sketch | Code | Template D |
+
+Output the complete text directly so the user can copy-paste it into Gemini. Generate the prompt in the language confirmed in Step 0.5.
 
 ---
 
@@ -129,9 +155,70 @@ Layout direction: left-to-right (default) or top-to-bottom (when content is dens
 All text: [confirmed language]
 ```
 
-### Code granularity — additional style rules
+## Cartoon & Sketch Visual Style Spec (alternative)
 
-Applied on top of the base spec above (does not replace it):
+```
+Visual aesthetic: hand-drawn, playful illustration style, inspired by cartoon storyboards
+  and sketch-note aesthetics (reference: angie.temaly.com portfolio)
+Background: warm cream / light parchment texture, or soft pastel gradient
+Node shape: wobbly hand-drawn rounded rectangles with visible pencil/ink stroke edges
+Lines: sketchy, slightly imperfect hand-drawn arrows with personality
+  — can use curved/wavy paths instead of straight lines
+Font: handwriting-style or comic sans-like font, friendly and readable
+
+Color scheme (by layer):
+  - Input layer: soft warm yellow or peach
+  - Core processing nodes: playful pastel palette — mint green, sky blue, lavender, coral
+  - Sub-regions / parallel paths: distinguished by different pastel fills
+  - External references / databases: small doodle icons (notebook, cloud, database sketch)
+  - Output layer: warm sunset orange or golden
+  - Containers (sub-flows / parallel regions): hand-drawn dashed border with rounded corners
+
+Special elements:
+  - Small doodle decorations around key nodes (stars, sparkles, tiny arrows, speech bubbles)
+  - Connector arrows can have small annotations as hand-written labels
+  - Important nodes can have slight drop shadow or highlight glow (sketch style)
+  - Use emoji or small icon sketches inside nodes to represent concepts visually
+  - Overall feel: like a talented designer's whiteboard sketch or illustrated explainer
+
+Layout direction: left-to-right (default) or top-to-bottom (when content is dense)
+All text: [confirmed language]
+```
+
+### Cartoon & Sketch — code granularity additions
+
+Applied on top of the Cartoon & Sketch base spec (does not replace it):
+
+```
+Node internal structure (code granularity only):
+  - Each node is split into two zones, still hand-drawn style:
+    - Top zone (title): step name in bold handwriting font
+    - Bottom zone (code annotation): file path + function name in a
+      monospace-handwriting hybrid font, slightly smaller, in a
+      "sticky note" or "code snippet" mini-box inside the node
+  - Code annotation format: 📄 path/to/file.rs → func_name()
+
+Call relationship arrows (code granularity only):
+  - Direct function call: hand-drawn solid arrow with slight wobble
+  - Cross-process / CLI / tool call: hand-drawn dashed arrow with
+    a small tag/label banner (speech-bubble style)
+  - Arrow labels in handwriting font
+
+Module boundaries:
+  - Different languages use different pastel background fills:
+    - TypeScript: light sky blue
+    - Rust: light peach/coral
+    - Python: light mint green
+    - Shell / CLI: light lavender
+  - Boundaries drawn as hand-sketched rounded rectangles with
+    a small flag/banner label (e.g., "🦀 Rust", "🐍 Python")
+```
+
+---
+
+### Code granularity — additional style rules (NotebookLM)
+
+Applied on top of the NotebookLM base spec above (does not replace it):
 
 ```
 Node internal structure (code granularity only):
@@ -285,6 +372,111 @@ Core steps:
   - `codex-rs/core/src/apply_patch.rs → apply_patch()` (Rust) — applies file changes
 Call relationships: `App` → solid arrow → `AgentControl`; `AgentControl` → dashed arrow (HTTP) → OpenAI API; `AgentControl` → solid arrow → `apply_patch`
 Output layer: Applied code patches | Shell command output
+
+### Template C: Cartoon & Sketch — Reporting Granularity
+
+Generate the prompt using the structure below when Cartoon & Sketch style is detected:
+
+```
+Please generate a hand-drawn, cartoon-style flowchart illustration that feels like a talented
+designer's whiteboard sketch or an illustrated explainer diagram.
+
+**Topic**: "[topic name]"
+
+### Visual Style Requirements (Cartoon & Sketch Style)
+
+- Visual aesthetic: hand-drawn, playful illustration style, inspired by cartoon storyboards
+  and sketch-note aesthetics
+- Element style: wobbly hand-drawn rounded rectangles with visible pencil/ink stroke edges,
+  sketchy imperfect arrows with personality, curved/wavy paths
+- Background: warm cream or light parchment texture
+- Color scheme: input layer in soft warm yellow/peach; core processing in playful pastels
+  (mint green, sky blue, lavender, coral); output layer in warm sunset orange/golden
+- Typography: handwriting-style font, friendly and readable, generous whitespace
+- Decorations: small doodle elements (stars, sparkles, tiny icons) around key nodes;
+  speech-bubble style labels on connectors; emoji or sketch icons inside nodes
+
+### Flowchart Structure and Content ([layout direction] layout, all text in [confirmed language])
+
+**[Column 1: Input Layer]**
+[One warm-yellow/peach hand-drawn node per input source, with small doodle icons,
+listing key sub-items inside]
+[All input nodes converge via sketchy curved arrows to a merge point, then continue right]
+
+**[Column 2: Core Processing Area (main body, largest area)]**
+[If large container: hand-drawn container with sketchy border, labeled "[Step name]"]
+[Sub-regions wrapped in hand-drawn dashed borders with rounded corners]
+[Each sub-node: handwriting-bold step name + small doodle icon + indented list]
+[External reference nodes: small notebook/cloud doodle icons, with sketchy arrow and label]
+
+**[Last Column: Output Layer]**
+Sketchy arrow from core area pointing to a warm orange/golden hand-drawn output node
+labeled: "[output name]"
+Inside the node, organized by dimension:
+- [Dimension 1]: [value 1] | [value 2] | ...
+- [Dimension 2]: [value A] | [value B] | ...
+
+### Final Check
+Ensure all text is clear and in [confirmed language]; hand-drawn style is consistent throughout;
+dashed boxes correctly wrap sub-flows; overall flow is clear despite the playful aesthetic;
+the diagram feels warm, approachable, and storytelling-friendly.
+```
+
+### Template D: Cartoon & Sketch — Code Granularity
+
+```
+Please generate a hand-drawn, cartoon-style technical design flowchart that shows code-level
+details in a playful, illustrated style — like a talented designer explaining architecture
+on a whiteboard with colored markers.
+
+**Topic**: "[topic name]"
+
+### Visual Style Requirements (Cartoon & Sketch Style · Code Granularity)
+
+- Visual aesthetic: hand-drawn, playful illustration style with code-level detail
+- Element style: wobbly hand-drawn rounded rectangles, sketchy arrows, curved paths
+- Background: warm cream or light parchment texture
+- Color scheme: input layer in soft warm yellow/peach; core processing in playful pastels;
+  output layer in warm sunset orange/golden
+- Typography: handwriting font for step titles; monospace-handwriting hybrid for code paths;
+  generous whitespace
+
+#### Code Granularity Style Rules (Sketch Edition)
+- **Node internal structure**: each node has two zones — top zone: step name in bold handwriting;
+  bottom zone: code annotation in a "sticky note" mini-box inside the node,
+  format: `📄 file/path → function_name()`
+- **Call relationship arrows**: direct call = sketchy solid arrow with wobble;
+  cross-process/tool call = sketchy dashed arrow with speech-bubble label
+- **Module boundaries**: different languages use pastel fills —
+  TypeScript: light sky blue 🟦; Rust: light peach 🦀; Python: light mint 🐍;
+  Shell: light lavender; boundary has a small flag/banner label
+
+### Flowchart Structure and Content ([layout direction] layout, all text in [confirmed language])
+
+**[Column 1: Input Layer]**
+[One warm-yellow hand-drawn node per input source with doodle icons]
+[Converge via sketchy arrows to merge point]
+
+**[Column 2+: Core Processing Area]**
+[Hand-drawn containers with sketchy borders]
+[Each sub-node top zone: step name in bold handwriting]
+[Each sub-node bottom zone (sticky-note style):
+  📄 [file path] → [entry function()]
+  📄 [file path 2] → [helper function()]]
+[Arrows: solid sketchy = direct call; dashed sketchy with speech-bubble = indirect call]
+[Language modules in corresponding pastel fill with flag labels]
+[External references as doodle icons with sketchy arrows]
+
+**[Last Column: Output Layer]**
+Sketchy arrow to warm orange hand-drawn output node: "[output name]"
+Inside the node:
+- [Dimension 1]: [value 1] | [value 2] | ...
+
+### Final Check
+Ensure hand-drawn style is consistent; code paths legible in sticky-note boxes;
+solid/dashed arrows correctly distinguished; language fills applied;
+overall feel is warm and approachable while remaining technically informative.
+```
 
 ---
 
