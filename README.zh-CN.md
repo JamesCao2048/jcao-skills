@@ -16,6 +16,8 @@
 | [skill-publisher](./skills/skill-publisher/) | 扫描个人或私有 Skill 的隐私泄露、i18n 问题和结构问题，输出脱敏后的发布版本，不修改源文件 | 🌱 New |
 | [device-env-setup](./skills/device-env-setup/) | 配置 Claude 在带有加速卡（NVIDIA GPU或Ascend NPU）的机器上执行命令的方式。支持本地、SSH、Docker 和 Conda 环境 | 🌱 New |
 
+🔥 Battle-tested — 在真实工作流中反复使用，经过验证 · 🌱 New — 刚发布，欢迎反馈
+
 ---
 
 ## 示例
@@ -77,22 +79,6 @@ npx skills@latest add JamesCao2048/jcao-skills/skills/flow-viz-prompt
 
 用 `/jcao-skills:flow-viz-prompt` 调用。
 
-**方式三 — 手动复制**
-
-克隆仓库后复制整个 Skill 文件夹：
-
-```bash
-git clone https://github.com/JamesCao2048/jcao-skills.git
-
-# macOS / Linux
-cp -r jcao-skills/skills/flow-viz-prompt ~/.claude/skills/
-
-# Windows (PowerShell)
-Copy-Item -Recurse jcao-skills\skills\flow-viz-prompt $HOME\.claude\skills\
-```
-
-> 复制整个文件夹，不要只复制 `SKILL.md`，部分 Skill 有配套的 reference 文件。
-
 **调用方式**
 
 用 slash 命令，或者直接用自然语言描述需求：
@@ -108,12 +94,18 @@ Copy-Item -Recurse jcao-skills\skills\flow-viz-prompt $HOME\.claude\skills\
 
 ---
 
-## 状态说明
+## 更新方法
 
-| 标签 | 含义 |
-|------|------|
-| 🔥 Battle-tested | 在真实工作流中反复使用，经过验证 |
-| 🌱 New | 刚发布，欢迎反馈 |
+**npx** — 重新执行安装命令即可覆盖：
+```bash
+npx skills@latest add JamesCao2048/jcao-skills/skills/flow-viz-prompt
+```
+
+**Plugin** — 更新全部已安装插件：
+```
+/plugin update
+```
+Claude Code 启动时也会后台自动更新。
 
 ---
 

@@ -16,6 +16,8 @@ Practical AI agent skills, battle-tested in real workflows.
 | [skill-publisher](./skills/skill-publisher/) | Scan a personal or proprietary skill for privacy leaks, i18n issues, and structure problems, outputs a sanitized publication-ready copy | 🌱 New |
 | [device-env-setup](./skills/device-env-setup/) | Configure how Claude executes commands on machines with accelerator devices (NVIDIA GPU or Ascend NPU). Supports local, SSH, Docker, and Conda environments | 🌱 New |
 
+🔥 Battle-tested — used repeatedly in real workflows · 🌱 New — feedback welcome
+
 ---
 
 ## Examples
@@ -77,22 +79,6 @@ Adds all skills under the `jcao-skills:` namespace:
 
 Invoke with `/jcao-skills:flow-viz-prompt`.
 
-**Option 3 — Manual copy**
-
-Clone the repo and copy the skill folder:
-
-```bash
-git clone https://github.com/JamesCao2048/jcao-skills.git
-
-# macOS / Linux
-cp -r jcao-skills/skills/flow-viz-prompt ~/.claude/skills/
-
-# Windows (PowerShell)
-Copy-Item -Recurse jcao-skills\skills\flow-viz-prompt $HOME\.claude\skills\
-```
-
-> Copy the whole folder, not just `SKILL.md` — some skills include reference files.
-
 **Invoking a skill**
 
 Use the slash command, or just describe what you want in plain language:
@@ -108,12 +94,18 @@ Use the slash command, or just describe what you want in plain language:
 
 ---
 
-## Status labels
+## Updating
 
-| Label | Meaning |
-|-------|---------|
-| 🔥 Battle-tested | Used repeatedly, shared with others, holds up in real workflows |
-| 🌱 New | Newly published — feedback welcome |
+**npx** — re-run the install command to overwrite:
+```bash
+npx skills@latest add JamesCao2048/jcao-skills/skills/flow-viz-prompt
+```
+
+**Plugin** — update all installed plugins:
+```
+/plugin update
+```
+Claude Code also auto-updates plugins in the background on startup.
 
 ---
 
