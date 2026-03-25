@@ -60,24 +60,24 @@ Prompt: *"Flowchart prompt of the memory architecture. I want to show what gets 
 
 ## How to install
 
-**Option 1 — npx (one-liner)**
+**Option 1 — npx** · pick individual skills, no namespace
 
 ```bash
 npx skills@latest add JamesCao2048/jcao-skills/skills/flow-viz-prompt
+npx skills@latest add JamesCao2048/jcao-skills/skills/skill-publisher
+npx skills@latest add JamesCao2048/jcao-skills/skills/device-env-setup
 ```
 
-Installs the skill directly into `~/.claude/skills/`. Invoke with `/flow-viz-prompt`.
+Installs into `~/.claude/skills/`. Invoke with `/flow-viz-prompt`.
 
-**Option 2 — Claude Code Plugin**
-
-Adds all skills under the `jcao-skills:` namespace:
+**Option 2 — Claude Code Plugin** · install everything at once, auto-updates
 
 ```
 /plugin marketplace add JamesCao2048/jcao-skills
 /plugin install jcao-skills@jcao-skills
 ```
 
-Invoke with `/jcao-skills:flow-viz-prompt`.
+Installs all skills under the `jcao-skills:` namespace. Invoke with `/jcao-skills:flow-viz-prompt`.
 
 **Invoking a skill**
 

@@ -60,24 +60,24 @@
 
 ## 安装方法
 
-**方式一 — npx（一行搞定）**
+**方式一 — npx** · 按需安装单个，无命名空间前缀
 
 ```bash
 npx skills@latest add JamesCao2048/jcao-skills/skills/flow-viz-prompt
+npx skills@latest add JamesCao2048/jcao-skills/skills/skill-publisher
+npx skills@latest add JamesCao2048/jcao-skills/skills/device-env-setup
 ```
 
-直接安装到 `~/.claude/skills/`，用 `/flow-viz-prompt` 调用。
+安装到 `~/.claude/skills/`，用 `/flow-viz-prompt` 调用。
 
-**方式二 — Claude Code Plugin**
-
-所有 skill 统一在 `jcao-skills:` 命名空间下：
+**方式二 — Claude Code Plugin** · 一次安装全部，自动更新
 
 ```
 /plugin marketplace add JamesCao2048/jcao-skills
 /plugin install jcao-skills@jcao-skills
 ```
 
-用 `/jcao-skills:flow-viz-prompt` 调用。
+所有 skill 统一在 `jcao-skills:` 命名空间下，用 `/jcao-skills:flow-viz-prompt` 调用。
 
 **调用方式**
 
