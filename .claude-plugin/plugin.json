@@ -1,0 +1,12 @@
+{
+  "name": "jcao-skills",
+  "description": "Practical AI agent skills, battle-tested in real workflows",
+  "version": "1.0.0",
+  "author": {
+    "name": "James Cao"
+  },
+  "homepage": "https://github.com/JamesCao2048/jcao-skills",
+  "repository": "https://github.com/JamesCao2048/jcao-skills",
+  "license": "MIT",
+  "keywords": ["skills", "flow-viz", "diagram", "device-setup", "publisher"]
+}

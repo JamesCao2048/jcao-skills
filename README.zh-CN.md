@@ -12,9 +12,9 @@
 
 | Skill | 功能 | 状态 |
 |-------|------|------|
-| [flow-viz-prompt](./flow-viz-prompt/) | 把任意 pipeline 描述或代码转成可直接粘贴的 NotebookLM 风格流程图生成 Prompt（支持汇报粒度和代码粒度） | 🔥 Battle-tested |
-| [skill-publisher](./skill-publisher/) | 扫描个人或私有 Skill 的隐私泄露、i18n 问题和结构问题，输出脱敏后的发布版本，不修改源文件 | 🌱 New |
-| [device-env-setup](./device-env-setup/) | 配置 Claude 在带有加速卡（NVIDIA GPU或Ascend NPU）的机器上执行命令的方式。支持本地、SSH、Docker 和 Conda 环境 | 🌱 New |
+| [flow-viz-prompt](./skills/flow-viz-prompt/) | 把任意 pipeline 描述或代码转成可直接粘贴的 NotebookLM 风格流程图生成 Prompt（支持汇报粒度和代码粒度） | 🔥 Battle-tested |
+| [skill-publisher](./skills/skill-publisher/) | 扫描个人或私有 Skill 的隐私泄露、i18n 问题和结构问题，输出脱敏后的发布版本，不修改源文件 | 🌱 New |
+| [device-env-setup](./skills/device-env-setup/) | 配置 Claude 在带有加速卡（NVIDIA GPU或Ascend NPU）的机器上执行命令的方式。支持本地、SSH、Docker 和 Conda 环境 | 🌱 New |
 
 ---
 
@@ -58,17 +58,26 @@
 
 ## 安装方法
 
-**方式一 — 让 Claude Code 帮你装（最简单，全平台通用）**
+**方式一 — npx（一行搞定）**
 
-在 Claude Code 里粘贴一句话：
-
-```
-Install this skill: https://github.com/JamesCao2048/jcao-skills/tree/main/flow-viz-prompt
+```bash
+npx skills@latest add JamesCao2048/jcao-skills/skills/flow-viz-prompt
 ```
 
-Claude 会自动拉取文件并复制到你的 skills 目录。
+直接安装到 `~/.claude/skills/`，用 `/flow-viz-prompt` 调用。
 
-**方式二 — 手动复制**
+**方式二 — Claude Code Plugin**
+
+所有 skill 统一在 `jcao-skills:` 命名空间下：
+
+```
+/plugin marketplace add JamesCao2048/jcao-skills
+/plugin install jcao-skills@jcao-skills
+```
+
+用 `/jcao-skills:flow-viz-prompt` 调用。
+
+**方式三 — 手动复制**
 
 克隆仓库后复制整个 Skill 文件夹：
 
@@ -76,13 +85,13 @@ Claude 会自动拉取文件并复制到你的 skills 目录。
 git clone https://github.com/JamesCao2048/jcao-skills.git
 
 # macOS / Linux
-cp -r jcao-skills/flow-viz-prompt ~/.claude/skills/
+cp -r jcao-skills/skills/flow-viz-prompt ~/.claude/skills/
 
 # Windows (PowerShell)
-Copy-Item -Recurse jcao-skills\flow-viz-prompt $HOME\.claude\skills\
+Copy-Item -Recurse jcao-skills\skills\flow-viz-prompt $HOME\.claude\skills\
 ```
 
-> 复制整个文件夹，不要只复制 `SKILL.md`，部分 Skill 在同目录下有配套的 reference 文件。
+> 复制整个文件夹，不要只复制 `SKILL.md`，部分 Skill 有配套的 reference 文件。
 
 **调用方式**
 

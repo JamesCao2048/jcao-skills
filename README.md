@@ -12,9 +12,9 @@ Practical AI agent skills, battle-tested in real workflows.
 
 | Skill | What it does | Status |
 |-------|-------------|--------|
-| [flow-viz-prompt](./flow-viz-prompt/) | Turn any pipeline description or code into a ready-to-paste NotebookLM style image generation prompt (supports reporting and code granularity) | 🔥 Battle-tested |
-| [skill-publisher](./skill-publisher/) | Scan a personal or proprietary skill for privacy leaks, i18n issues, and structure problems, outputs a sanitized publication-ready copy | 🌱 New |
-| [device-env-setup](./device-env-setup/) | Configure how Claude executes commands on machines with accelerator devices (NVIDIA GPU or Ascend NPU). Supports local, SSH, Docker, and Conda environments | 🌱 New |
+| [flow-viz-prompt](./skills/flow-viz-prompt/) | Turn any pipeline description or code into a ready-to-paste NotebookLM style image generation prompt (supports reporting and code granularity) | 🔥 Battle-tested |
+| [skill-publisher](./skills/skill-publisher/) | Scan a personal or proprietary skill for privacy leaks, i18n issues, and structure problems, outputs a sanitized publication-ready copy | 🌱 New |
+| [device-env-setup](./skills/device-env-setup/) | Configure how Claude executes commands on machines with accelerator devices (NVIDIA GPU or Ascend NPU). Supports local, SSH, Docker, and Conda environments | 🌱 New |
 
 ---
 
@@ -58,17 +58,26 @@ Prompt: *"Flowchart prompt of the memory architecture. I want to show what gets 
 
 ## How to install
 
-**Option 1 — Ask Claude Code (easiest, works on all platforms)**
+**Option 1 — npx (one-liner)**
 
-Open Claude Code in any directory and paste:
-
-```
-Install this skill: https://github.com/JamesCao2048/jcao-skills/tree/main/flow-viz-prompt
+```bash
+npx skills@latest add JamesCao2048/jcao-skills/skills/flow-viz-prompt
 ```
 
-Claude will fetch the files and copy them into your skills directory automatically.
+Installs the skill directly into `~/.claude/skills/`. Invoke with `/flow-viz-prompt`.
 
-**Option 2 — Manual copy**
+**Option 2 — Claude Code Plugin**
+
+Adds all skills under the `jcao-skills:` namespace:
+
+```
+/plugin marketplace add JamesCao2048/jcao-skills
+/plugin install jcao-skills@jcao-skills
+```
+
+Invoke with `/jcao-skills:flow-viz-prompt`.
+
+**Option 3 — Manual copy**
 
 Clone the repo and copy the skill folder:
 
@@ -76,13 +85,13 @@ Clone the repo and copy the skill folder:
 git clone https://github.com/JamesCao2048/jcao-skills.git
 
 # macOS / Linux
-cp -r jcao-skills/flow-viz-prompt ~/.claude/skills/
+cp -r jcao-skills/skills/flow-viz-prompt ~/.claude/skills/
 
 # Windows (PowerShell)
-Copy-Item -Recurse jcao-skills\flow-viz-prompt $HOME\.claude\skills\
+Copy-Item -Recurse jcao-skills\skills\flow-viz-prompt $HOME\.claude\skills\
 ```
 
-> Copy the whole folder, not just `SKILL.md`, some skills include reference files alongside.
+> Copy the whole folder, not just `SKILL.md` — some skills include reference files.
 
 **Invoking a skill**
 
